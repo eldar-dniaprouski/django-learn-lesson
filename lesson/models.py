@@ -34,10 +34,8 @@ class Material(models.Model):
                                on_delete=models.CASCADE,
                                related_name='user_materials')
 
-    class Meta:
-        ordering = ('-publish', )
-
-    def __str__(self):
-        return self.title
-
-
+#     class Meta:
+#         ordering = ('-publish', )
+#
+#     def __str__(self):
+#         return self.title
