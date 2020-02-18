@@ -12,6 +12,11 @@ class Material(models.Model):
         ('practice', 'Practical'),
     )
 
+    STATUS_TYPES = (
+        ('private', 'Draft'),
+        ('public', 'Published'),
+    )
+
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
@@ -22,6 +27,17 @@ class Material(models.Model):
     material_type = models.CharField(max_length=20,
                                      choices=MATERIAL_TYPES,
                                      default='theory')
+    status = models.CharField(max_length=20,
+                              choices=STATUS_TYPES,
+                              default='private')
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='user_materials')
+
+    class Meta:
+        ordering = ('-publish', )
+
+    def __str__(self):
+        return self.title
+
+

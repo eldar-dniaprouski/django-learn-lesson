@@ -1,3 +1,13 @@
 from django.contrib import admin
+from . import models
 
 # Register your models here.
+
+# admin.site.register(models.Material)
+
+
+@admin.register(models.Material)
+class MaterialAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'material_type', 'status', 'publish')
+    list_filter = ('status', 'created', 'publish', 'material_type')
+    search_fields = ('')
