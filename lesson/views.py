@@ -8,7 +8,7 @@ from . import models
 
 def all_materials(request):
     material_list = models.Material.objects.all()
-
+    # material_list = models.Material.published.all()
     return render(request,
                   'material/list.html',
                   {"materials": material_list})
@@ -17,6 +17,7 @@ def all_materials(request):
 def material_details(request, year, month, day, slug):
     material = get_object_or_404(models.Material,
                                  slug=slug,
+                                 status='public',
                                  publish__year=year,
                                  publish__month=month,
                                  publish__day=day)

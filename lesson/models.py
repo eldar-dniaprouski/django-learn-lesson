@@ -6,6 +6,10 @@ from django.urls import reverse
 
 # Create your models here.
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(status='public', publish__year='2020')
+
 
 class Material(models.Model):
     MATERIAL_TYPES = (
@@ -34,6 +38,8 @@ class Material(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='user_materials')
+    published = PublishedManager()
+    objects = models.Manager()
 
 #     class Meta:
 #         ordering = ('-publish', )
