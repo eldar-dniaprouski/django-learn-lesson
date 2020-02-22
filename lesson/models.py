@@ -21,7 +21,7 @@ class Material(models.Model):
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
     body = models.TextField()
-    publish = models.DateTimeField(default=timezone.now())
+    publish = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     material_type = models.CharField(max_length=20,
