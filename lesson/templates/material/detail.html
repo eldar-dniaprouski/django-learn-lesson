@@ -3,6 +3,7 @@
 {% block title %}Material list{% endblock %}
 
 {% block content %}
+<a href="{% url "lesson:all_materials" %}">All Materials</a>
     <h1>{{ material.title}}</h1>
         <p>
             Published {{ material.publish }} by {{ material.author }}
