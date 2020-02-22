@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from . import models
 
@@ -12,3 +12,14 @@ def all_materials(request):
     return render(request,
                   'material/list.html',
                   {"materials": material_list})
+
+
+def material_details(request, year, month, day, slug):
+    material = get_object_or_404(models.Material,
+                                 slug=slug,
+                                 publish__year=year,
+                                 publish__month=month,
+                                 publish__day=day)
+    return render(request,
+                  'material/detail.html',
+                  {'material': material})
