@@ -15,4 +15,5 @@
             {{ material.body|linebreaks|truncatewords_html:5 }}
         </p>
     {% endfor %}
+    <a href="{% url "lesson:create_form" %}">create</a>
 {% endblock %}
