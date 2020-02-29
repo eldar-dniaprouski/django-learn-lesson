@@ -38,9 +38,8 @@ class Material(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='user_materials')
-    published = PublishedManager()
     objects = models.Manager()
-
+    published = PublishedManager()
 #     class Meta:
 #         ordering = ('-publish', )
 #

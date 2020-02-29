@@ -11,4 +11,9 @@
         <p>
             {{ material.body|linebreaks}}
         </p>
+        <p>
+        <a href="{% url "lesson:share_material" material.id %}" >
+            Share this post
+        </a>
+        </p>
 {% endblock%}

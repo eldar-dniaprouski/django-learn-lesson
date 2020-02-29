@@ -12,7 +12,7 @@
             Published {{ material.publish }} by {{ material.author }}
         </p>
         <p>
-            {{ material.body|truncatewords:5|linebreaks }}
+            {{ material.body|linebreaks|truncatewords_html:5 }}
         </p>
     {% endfor %}
 {% endblock %}
