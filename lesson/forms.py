@@ -15,3 +15,7 @@ class MaterialForm(forms.ModelForm):
         model = models.Material
         fields = ('title', 'body', 'status')
 
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
