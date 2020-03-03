@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as au_views
 from . import views
 
 app_name = 'lesson'
@@ -12,6 +13,7 @@ urlpatterns = [
          name='share_material'),
     path('create/', views.create_form,
          name='create_form'),
-    path('login/', views.user_login, name='login')
-
+    # path('login/', views.user_login, name='login')
+    path('login/', au_views.LoginView.as_view(), name='login'),
+    path('logout/', au_views.LogoutView.as_view(), name='logout'),
 ]
