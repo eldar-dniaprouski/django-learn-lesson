@@ -16,4 +16,24 @@
             Share this post
         </a>
         </p>
+
+        {% with material.comments.all.count as total_comments %}
+            <h2>{{ total_comments }} comment{{ total_comments|pluralize}}</h2>
+        {% endwith %}
+        {% for comment in material.comments.all %}
+            <p>comment #{{forloop.counter}} by {{ comment.name }} {{ comment.created }}</p>
+            <p>{{ comment.body|linebreaks }}</p>
+        {% empty %}
+            <p>No comments</p>
+        {% endfor %}
+
+        {% if new_comment %}
+            <p>comment was created</p>
+        {% else %}
+            <form action="." method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <p><input type="submit" value="Box in comments"></p>
+            </form>
+        {% endif %}
 {% endblock%}

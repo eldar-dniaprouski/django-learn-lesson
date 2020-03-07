@@ -42,9 +42,9 @@ class Material(models.Model):
     published = PublishedManager()
 #     class Meta:
 #         ordering = ('-publish', )
-#
-#     def __str__(self):
-#         return self.title
+
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         return reverse('lesson:material_details',
@@ -52,3 +52,14 @@ class Material(models.Model):
                               self.publish.month,
                               self.publish.day,
                               self.slug])
+
+
+class Comment(models.Model):
+    material = models.ForeignKey(Material,
+                                 on_delete=models.CASCADE,
+                                 related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    objects = models.Manager()

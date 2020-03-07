@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from . import models
 from django.contrib.auth.models import User
@@ -29,13 +29,27 @@ class MaterialListView(LoginRequiredMixin, ListView):
 def material_details(request, year, month, day, slug):
     material = get_object_or_404(models.Material,
                                  slug=slug,
-                                 # status='public',
+                                 # status="public",
                                  publish__year=year,
                                  publish__month=month,
                                  publish__day=day)
+    new_comment = None
+
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.material = material
+            new_comment.save()
+        return redirect(material)
+    else:
+        comment_form = forms.CommentForm()
+
     return render(request,
                   'material/detail.html',
-                  {'material': material})
+                  {'material': material,
+                   'new_comment': new_comment,
+                   'form': comment_form})
 
 
 def share_material(request, material_id):
