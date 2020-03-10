@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}profile screen {% endblock %}
+{% block content %}
+<p>birthday: {{ user.profile.birth }} </p>
+<p>name: {{ user.first_name|add:user.last_name }}</p>
+<p><img src="{{ user.profile.photo.url }}" alt="alttext"></p>
+{% endblock %}

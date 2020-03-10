@@ -21,3 +21,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'body', 'created',)
     list_filter = ('created', )
     search_fields = ('name', 'email', 'body')
+
+
+@admin.register(models.Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    pass
