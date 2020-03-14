@@ -1,4 +1,9 @@
 {% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css%}
+{% bootstrap_javascript jquery='full' %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <title>{% block title %}MY DEFAULT TITLE{% endblock%}</title>
@@ -16,7 +21,28 @@
         <a href="{% url "lesson:login" %}"> login </a>
     {% endif %}
 </header>
-    {% block content %}
-    {% endblock %}
+   <div class="container-flex m-4">
+        <div class="row mb-1">
+            <div class="col-sm-9 pr-sm-1 pl-sm-0">
+                <div class="p-3 border border-primary rounded" >{% block content %}{% endblock %}</div>
+            </div>
+            <div class="col-sm-3 border border-primary rounded">
+                {% block menu %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div class="row border  border-primary rounded">
+            <div class="col-sm-3">
+                Белов Максим
+            </div>
+            <div class="col-sm-6">
+                Web development Python
+            </div>
+            <div class="col-sm-3">
+                IT-academy
+            </div>
+        </div>
+    </div>
 </body>
 </html>

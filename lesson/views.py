@@ -11,19 +11,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-# @login_required
-# def all_materials(request):
-#     material_list = models.Material.objects.all()
-#     # material_list = models.Material.published.all()
-#     return render(request,
-#                   'material/list.html',
-#                   {"materials": material_list})
+
+@login_required
+def all_materials(request):
+    material_list = models.Material.objects.all()
+    # material_list = models.Material.published.all()
+    return render(request,
+                  'material/list.html',
+                  {"materials": material_list})
 
 
-class MaterialListView(LoginRequiredMixin, ListView):
-    queryset = models.Material.objects.all()
-    context_object_name = 'materials'
-    template_name = 'material/list.html'
+# class MaterialListView(LoginRequiredMixin, ListView):
+#     queryset = models.Material.objects.all()
+#     context_object_name = 'materials'
+#     template_name = 'material/list.html'
 
 
 def material_details(request, year, month, day, slug):
@@ -146,6 +147,7 @@ def register(request):
                   'register.html',
                   {'form': user_form})
 
+
 @login_required
 def edit(request):
     if request.method == 'POST':
@@ -153,7 +155,8 @@ def edit(request):
                                        data=request.POST)
         profile_form = forms.ProfileEditForm(instance=request.user.profile,
                                              data=request.POST,
-                                             files=request.FILES)
+                                             files=request.FILES,
+                                             )
         user_form.save()
         profile_form.save()
     else:
@@ -163,3 +166,19 @@ def edit(request):
                   'edit.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})
+
+
+def lesson_details(request, slug):
+    lesson = get_object_or_404(models.Lesson, slug=slug)
+    lessons = models.Lesson.objects.all()
+    return render(request,
+                  'lesson/detail.html',
+                  {'lesson': lesson,
+                   'lessons': lessons})
+
+
+def all_lessons(request):
+    lessons = models.Lesson.objects.all()
+    return render(request,
+                  'lesson/list.html',
+                  {"lessons": lessons})

@@ -14,6 +14,14 @@
         <p>
             {{ material.body|linebreaks|truncatewords_html:5 }}
         </p>
+
+        <p>
+            All Lessons for this material:
+            {% for lesson in material.lessons.all %}
+                <br>
+                {{lesson.title}}
+            {% endfor %}
+        </p>
     {% endfor %}
     <a href="{% url "lesson:create_form" %}">create</a>
 {% endblock %}
